@@ -32,7 +32,7 @@ def getLine(input, bgr):
 
 def pixel2Population(line, x_origin, x_step, x_scale, y_origin, y_step, y_scale):
 
-    new_line = []
+    new_line = np.zeros((24,2))
 
     for i in range(24):
 
@@ -43,6 +43,7 @@ def pixel2Population(line, x_origin, x_step, x_scale, y_origin, y_step, y_scale)
 
         hour = (((x-x_origin)/x_step)+13)%24
 
-        new_line.append([population,hour])
+        new_line[i][0] = hour
+        new_line[i][1] = population
 
     return new_line

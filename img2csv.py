@@ -1,30 +1,36 @@
 import cv2
-import numpy as np
 import util
+import pandas as pd
+import numpy as np
 
-graph = [("before_avg", [255, 0, 0]), ("after_weekday", [0, 255, 255]), ("after_weekend", [0, 0, 255])]
+graph = [("before", [255, 0, 0]), ("after_weekday", [0, 255, 255]), ("after_weekend", [0, 0, 255])]
 
-x_origin = 55
-x_step = 45
-x_scale = 1
+csv = pd.read_csv('input.csv')
 
-y_origin= 694
-y_step = 33
-y_scale = 2000
+for i in range(len(csv)):
 
-input = cv2.imread('input/test2.PNG')
-y_origin = input.shape[0] - y_origin
+    c = csv.iloc[i]
 
-for i in range(len(graph)):
+    input = cv2.imread('input/'+c.city+'.PNG')
+    c.y_origin = input.shape[0] - c.y_origin
 
-    bgr = graph[i][1]
+    for i in range(len(graph)):
 
-    line = util.getLine(input,bgr)
+        bgr = graph[i][1]
 
-    line = util.pixel2Population(line, x_origin, x_step, x_scale, y_origin, y_step, y_scale)
+        line = util.getLine(input,bgr)
 
-    print(line)
+        line = util.pixel2Population(line, c.x_origin, c.x_step,
+                                c.x_scale, c.y_origin, c.y_step,
+                                c.y_scale)
 
-    exit()
+        df = pd.DataFrame({'hours':line[:,0],
+                           'population':line[:,1]})
+
+        df.to_csv('csv/'+c.city+'_'+graph[i][0]+'.csv',index=False)
+
+
+
+
 
 
