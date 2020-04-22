@@ -8,12 +8,16 @@ def getLine(input, bgr):
     mask = cv2.inRange(input, lower, upper)
 
     kernel = np.ones((3, 3), np.uint8)
-    mask = cv2.dilate(mask, kernel, iterations=1)
+    mask = cv2.dilate(mask, kernel, iterations=10)
+    # mask = cv2.erode(mask, kernel, iterations=12)
+
+    # cv2.imshow('mask',mask)
+    # cv2.waitKey(0)
 
     contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     for c in contours:
-        if len(c) > 1500:
+        if len(c) > 1000:
             mask = np.zeros(input.shape, np.uint8)
             cv2.drawContours(mask, c, -1, (255, 255, 255), 3)
             break
@@ -25,7 +29,7 @@ def getLine(input, bgr):
     for i in range(mask.shape[1]):
         for j in range(mask.shape[0]):
             if mask[j][i] == 255:
-                line[i] = (mask.shape[0] - j) + 3
+                line[i] = (mask.shape[0] - j) + 30 # 30 pixels to compensate for the dilation
                 break
 
     return line

@@ -1,2 +1,11 @@
 city,x_origin,x_step,x_scale,y_origin,y_step,y_scale
 shibuya,55,45,1,694,33,2000
+chiba,43,38,1,604,39,1000
+yokohama,46,38,1,599,31,2000
+umeda,48,38,1,499,53,5000
+tenjin,38,38,1,583,37,2000
+oomiya,42,38,1,602,37,1000
+nanba,47,38,1,595,32,2000
+sannomiya,48,38,1,593,29,1000
+kawasaki,49,38,1,600,45,2000
+funabashi,42,38,1,602,36,1000
