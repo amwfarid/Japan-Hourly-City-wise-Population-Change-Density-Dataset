@@ -6,9 +6,13 @@ This repository is an independant effort to convert government published graph d
 
 Presently, the method used to convert graph images (inside the PDF) to CSV is to:
 (1) Take a screenshot of plots
+
 (2) Use photoshop to increase contrast and remove unneeded artifacts, thus making the algorithm's work easier. The can be found in '/input'
+
 (3) Manually estimate origin and step points for both x and y axes, then store them in a csv file
+
 (4) Running an image processing algorithm 'img2csv.py' to parse the images and extract the datapoints
+
 (5) Saving the datapoints to '/csv'
 
 The csv data for the following cities/areas were extracted and made available:
